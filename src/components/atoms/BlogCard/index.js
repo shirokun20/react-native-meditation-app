@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
+import { setWitdh } from '../../../library/dimenstion.lib'
 
 function index({ title, ilustration }) {
     return (
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.13,
         shadowRadius: 4.51,
-        elevation: 8,
+        elevation: 2,
     },
     text: {
         fontFamily: 'OpenSans-Bold',
@@ -38,8 +39,9 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
-        resizeMode: 'contain',
-        height: 100
+        height: setWitdh(30),
+        borderTopRightRadius: 5,        
+        borderTopLeftRadius: 5,        
     },
     date:{
         color:'#808080',

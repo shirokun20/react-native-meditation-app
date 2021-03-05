@@ -38,7 +38,7 @@ const Router = () => {
             <Stack.Screen name="Chakra" component={OnboardingChakra} options={LeftTransition} />
             <Stack.Screen name="Primordial" component={OnboardingPrimordial} options={LeftTransition} />
             <Stack.Screen name="Metta" component={OnboardingMetta} options={LeftTransition} />
-            <Stack.Screen name="Home" component={MyTab} />
+            <Stack.Screen name="Home" component={Home} />
         </Stack.Navigator>
     )
 }

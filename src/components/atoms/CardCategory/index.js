@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
         marginRight:16,
         borderRadius:10,
         paddingBottom:20,
+        elevation: 2,
+        marginVertical: 4,
     },
     text:{
         textAlign:'center',

@@ -1,20 +1,75 @@
 import React from 'react'
-import { View, Text, StyleSheet, StatusBar } from 'react-native'
-import { ILCharkra } from '../../assets'
+import { View, Text, StyleSheet, StatusBar, Animated } from 'react-native'
+import { Easing } from 'react-native-reanimated';
 import { Button } from '../atoms'
 function index({title,subtitle,description,ilustration,onNext,onSkip }) {
+    
+    const ImageAnimation = React.useRef(new Animated.Value(0)).current;
+    const subTextAnimation = React.useRef(new Animated.Value(0)).current;
+    const descTextAnimation = React.useRef(new Animated.Value(0)).current;
+
+    React.useEffect(()=> {
+        Animated.sequence([
+            Animated.timing(ImageAnimation, {
+                toValue: 1,
+                duration: 700,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }),
+            Animated.timing(subTextAnimation, {
+                toValue: 1,
+                duration: 700,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }),
+            Animated.timing(descTextAnimation, {
+                toValue: 1,
+                duration: 700,
+                easing: Easing.linear,
+                useNativeDriver: true,
+            }),
+        ]).start();
+    }, []);
+
+    const opacity = ImageAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+    });
+
+    const subTextopacity = subTextAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+    });
+
+    const descTextopacity = descTextAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1],
+    });
+
+    const scale = ImageAnimation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [3, 1]
+    });
+
     return (
         <View style={{ flex: 1, backgroundColor: '#2748C9', }}>
             <View style={styles.container}>
                 <StatusBar backgroundColor="#2748C9" />
                 <Text style={styles.title}>{title}</Text>
-                <View style={styles.image}>
+                <Animated.View style={[styles.image, {
+                    opacity,
+                    transform: [{ scale }]
+                }]}>
                     {ilustration}
-                </View>
-                <Text style={styles.subtitle}>{subtitle}</Text>
-                <Text style={styles.description}>
+                </Animated.View>
+                <Animated.Text style={[styles.subtitle, {
+                    opacity: subTextopacity,
+                }]}>{subtitle}</Animated.Text>
+                <Animated.Text style={[styles.description, {
+                    opacity: descTextopacity,
+                }]}>
                     {description}
-            </Text>
+                </Animated.Text>
             </View>
             <View style={styles.footer}>
                 <Text style={styles.lewati} onPress={onSkip}>Lewati</Text>
